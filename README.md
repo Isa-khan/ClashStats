@@ -15,3 +15,26 @@ pip install requirements.txt
 api_key = "your_api_key_here" # Get from developer.clashroyale.com
 player_tag = "your_player_tag" # Example: "JUQLRLJ"
 ```
+
+
+3. Run the notebook:
+
+```bash
+jupyter notebook clash_royal_test.ipynb
+```
+
+## Features
+- View player wins
+- Trophy animation display
+- Basic error handling
+
+For more guidance visit [Clash Royale API Docs](https://developer.clashroyale.com)
+
+
+
+
+
+
+
+
+
