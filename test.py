@@ -29,7 +29,7 @@ class RoyaleAPI:
         self.last_request_time = time.time()
 
     def get_player_info(self, player_tag: str) -> Optional[Dict[str, Any]]:
-        # Remove any existing # or %23 and add the proper format
+
         clean_tag = player_tag.strip('#').strip('%23')
         url = f"{self.BASE_URL}/players/%23{clean_tag}"
         
@@ -44,7 +44,7 @@ class RoyaleAPI:
                 retry_after = int(e.response.headers.get('retry-after', 60))
                 print(f"Rate limit reached. Waiting {retry_after} seconds...")
                 time.sleep(retry_after)
-                return self.get_player_info(player_tag)  # Retry the request
+                return self.get_player_info(player_tag)  
             elif e.response.status_code == 403:
                 print("Authentication error. Please check your API key.")
             elif e.response.status_code == 404:
@@ -70,16 +70,13 @@ def display_wins(wins: int, max_display: int = 20):
         print(f"... and {wins - max_display} more wins! 🎮")
 
 def main():
-    # Load environment variables
     load_dotenv()
     
-    # Get API key from environment variable
     api_key = os.getenv('CLASH_ROYALE_API_KEY')
     if not api_key:
         print("Error: API key not found. Please set CLASH_ROYALE_API_KEY environment variable.")
         return
 
-    # Initialize API client
     api = RoyaleAPI(api_key)
     player_tag = "JUQLRLJ"
     
@@ -89,7 +86,6 @@ def main():
             wins = player_data.get('wins', 0)
             display_wins(wins)
             
-            # Display additional player info
             print(f"\nPlayer Name: {player_data.get('name')}")
             print(f"Trophies: {player_data.get('trophies')}")
             print(f"Level: {player_data.get('expLevel')}")
